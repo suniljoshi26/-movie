@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { fatchDataFromapi } from "./utils/api";
-// import { getApiConfiguration } from "./store/homeSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { getApiConfiguration } from "./store/homeSlice";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -9,6 +8,9 @@ import Detail from "./pages/detail/Detail";
 import SearchResult from "./pages/searchResult/SearchResult";
 import PageNotFound from "./pages/404/PageNotFound";
 import Explore from "./pages/explore/Explore";
+import Header from "./component/header/Header";
+import Foter from "./component/foter/Foter";
+
 function App() {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
@@ -24,6 +26,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:mediaType/:id" element={<Detail />} />
@@ -32,6 +35,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+      <Foter />
     </>
   );
 }
