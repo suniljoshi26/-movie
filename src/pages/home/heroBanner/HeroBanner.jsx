@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ContentWrapper from "../../../component/contentWrapper/ContentWrapper";
+import Img from "../../../component/lazyLoadImage/Img";
 import useFetch from "../../../hooks/useFetch";
 import "./style.scss";
 const HeroBanner = () => {
   const [input, setInput] = useState("");
   const [background, setBackground] = useState("");
   const navigate = useNavigate();
+  const { url } = useSelector((state) => state.home);
 
   const { data, loading } = useFetch("/movie/upcoming ");
   useEffect(() => {
-    const bg = data?.results[Math.floor(Math.random() * 20)].backdrop_path;
+    const bg =
+      url.backdrop +
+      data?.results[Math.floor(Math.random() * 20)].backdrop_path;
     setBackground(bg);
   }, [data]);
 
@@ -20,7 +26,14 @@ const HeroBanner = () => {
   };
   return (
     <div className="heroBanner">
-      <div className="wrapper">
+      {!loading && (
+        <div className="backdrop-img">
+          <Img src={background} />
+        </div>
+      )}
+      <div></div>
+      <ContentWrapper>
+        {" "}
         <div className="heroBannerContent">
           <span className="title">Welcome.</span>
           <span className="subTitle">
@@ -37,7 +50,7 @@ const HeroBanner = () => {
             <button>Search</button>
           </div>
         </div>
-      </div>
+      </ContentWrapper>
     </div>
   );
 };
