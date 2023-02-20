@@ -18,7 +18,7 @@ const Header = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, [location]);
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
@@ -29,7 +29,7 @@ const Header = () => {
   };
 
   const controlNavbar = () => {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     if (window.scrollY > 200) {
       if (window.scrollY > lastScrooly && !mobileMenu) {
         setShow("hide");
@@ -42,7 +42,7 @@ const Header = () => {
     setLastScrooly(window.scrollY);
   };
   useEffect(() => {
-    window.addEventListener("scroll", controlNavbar);
+    window.addEventListener("scrollY", controlNavbar);
 
     return () => window.removeEventListener("scroll", controlNavbar);
   }, [lastScrooly]);

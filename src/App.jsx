@@ -36,13 +36,13 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:mediaType/:id" element={<Detail />} />
+          {/* <Route path="/:mediaType/:id" element={<Detail />} />
           <Route path=" /search/:query" element={<SearchResult />} />
           <Route path="/explore/:mediaType" element={<Explore />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />*/}
         </Routes>
+        <Foter />
       </BrowserRouter>
-      <Foter />
     </>
   );
 }
