@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
@@ -9,13 +9,16 @@ import "./style.scss";
 import logo from "../../assets/movix-logo.svg";
 const Header = () => {
   const [show, setShow] = useState("top");
-  const [lastScrooly, seiLastScrooly] = useState(0);
+  const [lastScrooly, setLastScrooly] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [query, setQuery] = useState("");
   const [showSearch, setShowSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
@@ -24,6 +27,26 @@ const Header = () => {
       }, 1000);
     }
   };
+
+  const controlNavbar = () => {
+    console.log(window.scrollY);
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrooly && !mobileMenu) {
+        setShow("hide");
+      } else {
+        setShow("show");
+      }
+    } else {
+      setShow("top");
+    }
+    setLastScrooly(window.scrollY);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [lastScrooly]);
+
   const openSearch = () => {
     setMobileMenu(false);
     setShowSearch(true);
@@ -32,6 +55,14 @@ const Header = () => {
     setMobileMenu(true);
     setShowSearch(false);
   };
+  const navigationHandler = (type) => {
+    if (type === "movie") {
+      navigate("/explore/movie");
+    } else {
+      navigate("/explore/tv");
+    }
+    setMobileMenu(false);
+  };
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
@@ -39,10 +70,14 @@ const Header = () => {
           <img src={logo} />
         </div>
         <ul className="menuItems">
-          <li className="menuItem">Movies</li>
-          <li className="menuItem">Tv Shows</li>
+          <li className="menuItem" onClick={() => navigationHandler("movie")}>
+            Movies
+          </li>
+          <li className="menuItem" onClick={() => navigationHandler("tv")}>
+            Tv Shows
+          </li>
           <li className="menuItem">
-            <HiOutlineSearch />
+            <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
         <div className="mobileMenuItems">
