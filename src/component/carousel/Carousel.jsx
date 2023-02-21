@@ -11,14 +11,26 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Img from "../lazyLoadImage/Img";
 import PosterFallback from "../../assets/no-poster.png";
 // import CircleRating from "../circleRating/CircleRating";
-// import Genres from "../genres/Genres";
+// // import Genres from "../genres/Genres";
 
 import "./style.scss";
+import Reating from "../reating/Reating";
 const Carousel = ({ data, loading }) => {
   const carouseContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
-  const navigation = (dir) => {};
+  const navigation = (dir) => {
+    const container = carouseContainer.current;
+
+    const scrollAmount =
+      dir === "left"
+        ? container.scrollLeft - (container.offsetWidth + 20)
+        : container.scrollLeft + (container.offsetWidth + 20);
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
   const skItem = () => {
     return (
       <div className="skeletonItem">
@@ -38,11 +50,11 @@ const Carousel = ({ data, loading }) => {
           onClick={() => navigation("left")}
         />
         <BsFillArrowRightCircleFill
-          classNamr="carouselRighttNav arrow"
+          className="carouselRighttNav arrow"
           onClick={() => navigation("right")}
         />
         {!loading ? (
-          <div className="carouselItems">
+          <div className="carouselItems" ref={carouseContainer}>
             {data?.map((item) => {
               const posterUrl = item.poster_path
                 ? url.poster + item.poster_path
@@ -51,6 +63,7 @@ const Carousel = ({ data, loading }) => {
                 <div key={item.id} className="carouselItem">
                   <div className="posterBlock">
                     <Img src={posterUrl} />
+                    <Reating rating={item.vote_average.toFixed(2)} />
                   </div>
                   <div className="textBlock">
                     <span className="title">{item.title || item.name}</span>
