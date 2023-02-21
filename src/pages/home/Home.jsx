@@ -1,11 +1,12 @@
 import React from "react";
 import HeroBanner from "./heroBanner/HeroBanner";
+import Tranding from "./tranding/Tranding";
 
 const Home = () => {
   return (
     <div>
       <HeroBanner />
-      <div style={{ background: "black", height: "100%" }}></div>
+      <Tranding />
     </div>
   );
 };
