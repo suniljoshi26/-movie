@@ -4,12 +4,15 @@ import useFetch from "../../hooks/useFetch";
 import DetailBanner from "./detailBanner/DetailBanner";
 
 const Detail = () => {
-  // const { mediaType, id } = useParams();
-  // const { data, loading } = useFetch(`/${movie}/${movieId}`);
+  const { mediaType, id } = useParams();
+  const { data, loading } = useFetch(`/${mediaType}/${id}/videos`);
+  const { data: credits, loading: creditsLoading } = useFetch(
+    `/${mediaType}/${id}/credits`
+  );
 
   return (
     <div>
-      <DetailBanner />
+      <DetailBanner video={data?.results[0]} crew={credits?.crew} />
     </div>
   );
 };
