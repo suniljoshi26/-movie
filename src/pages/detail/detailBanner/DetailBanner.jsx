@@ -11,11 +11,13 @@ import useFetch from "../../../hooks/useFetch";
 // import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import ContentWrapper from "../../../component/contentWrapper/ContentWrapper";
+import Reating from "../../../component/reating/Reating";
 
 const DetailBanner = ({ video, crew }) => {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { url } = useSelector((state) => state.home);
+  //   const _genres = data?.map((g) => g.id);
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
@@ -51,6 +53,10 @@ const DetailBanner = ({ video, crew }) => {
                       ).format("YYYY")})`}
                     </div>
                     <div className="subtitle">{data.tagline}</div>
+                    {/* genres comp */}
+                    <div className="row">
+                      <Reating rating={data.vote_average.toFixed(1)} />
+                    </div>
                   </div>
                 </div>
               </ContentWrapper>
