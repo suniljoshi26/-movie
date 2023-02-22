@@ -12,6 +12,7 @@ import useFetch from "../../../hooks/useFetch";
 import PosterFallback from "../../../assets/no-poster.png";
 import ContentWrapper from "../../../component/contentWrapper/ContentWrapper";
 import Reating from "../../../component/reating/Reating";
+import { PlayButton } from "./PlayButton";
 
 const DetailBanner = ({ video, crew }) => {
   const { mediaType, id } = useParams();
@@ -56,6 +57,15 @@ const DetailBanner = ({ video, crew }) => {
                     {/* genres comp */}
                     <div className="row">
                       <Reating rating={data.vote_average.toFixed(1)} />
+
+                      <div className="playbtn" onClick={() => ""}>
+                        <PlayButton />
+                        <span className="text">Watch Trailer</span>
+                      </div>
+                    </div>
+                    <div className="overview">
+                      <div className="heading">Overview</div>
+                      <div className="description">{data.overview}</div>
                     </div>
                   </div>
                 </div>
