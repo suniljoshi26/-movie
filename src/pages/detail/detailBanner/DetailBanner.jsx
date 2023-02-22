@@ -13,10 +13,13 @@ import PosterFallback from "../../../assets/no-poster.png";
 import ContentWrapper from "../../../component/contentWrapper/ContentWrapper";
 import Reating from "../../../component/reating/Reating";
 import { PlayButton } from "./PlayButton";
+import VideoPopup from "../../../component/videoPopup/VideoPopup";
 
 const DetailBanner = ({ video, crew }) => {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
+  const [show, setShow] = useState(false);
+  const [videoId, setVideoId] = useState(null);
   const { url } = useSelector((state) => state.home);
   //   const _genres = data?.map((g) => g.id);
 
@@ -64,7 +67,13 @@ const DetailBanner = ({ video, crew }) => {
                     <div className="row">
                       <Reating rating={data.vote_average.toFixed(1)} />
 
-                      <div className="playbtn" onClick={() => ""}>
+                      <div
+                        className="playbtn"
+                        onClick={() => {
+                          setShow(true);
+                          setVideoId(video.key);
+                        }}
+                      >
                         <PlayButton />
                         <span className="text">Watch Trailer</span>
                       </div>
@@ -141,6 +150,12 @@ const DetailBanner = ({ video, crew }) => {
                     )}
                   </div>
                 </div>
+                <VideoPopup
+                  show={show}
+                  setShow={setShow}
+                  videoId={videoId}
+                  setVideoId={setVideoId}
+                />
               </ContentWrapper>
             </>
           )}
