@@ -1,5 +1,7 @@
 import React from "react";
 import HeroBanner from "./heroBanner/HeroBanner";
+import Popular from "./popular/Popular";
+import TopRated from "./toprated/TopRated";
 import Tranding from "./tranding/Tranding";
 
 const Home = () => {
@@ -7,6 +9,8 @@ const Home = () => {
     <div>
       <HeroBanner />
       <Tranding />
+      <Popular />
+      <TopRated />
     </div>
   );
 };
