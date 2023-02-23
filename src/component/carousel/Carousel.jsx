@@ -15,7 +15,7 @@ import PosterFallback from "../../assets/no-poster.png";
 
 import "./style.scss";
 import Reating from "../reating/Reating";
-const Carousel = ({ data, loading, endpoint }) => {
+const Carousel = ({ data, loading, endpoint, title }) => {
   const carouseContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
@@ -45,6 +45,7 @@ const Carousel = ({ data, loading, endpoint }) => {
   return (
     <div className="carousel ">
       <ContentWrapper>
+        {title && <div className="carouselTitle">{title}</div>}
         <BsFillArrowLeftCircleFill
           className="carouselLeftNav arrow"
           onClick={() => navigation("left")}
