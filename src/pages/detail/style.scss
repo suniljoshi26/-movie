@@ -1,0 +1,8 @@
+@import "../../mixins.scss";
+
+.detail {
+  @include md {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}

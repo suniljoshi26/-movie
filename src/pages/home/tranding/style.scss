@@ -1,6 +1,12 @@
+@import "../../../mixins.scss";
+
 .carouseSection {
   position: relative;
   margin-bottom: 70px;
+  @include md {
+    margin-right: 120px;
+    margin-left: 120px;
+  }
   .contentWrapper {
     display: flex;
     align-items: center;
