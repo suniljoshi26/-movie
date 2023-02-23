@@ -6,7 +6,7 @@ import Recommendation from "./carousels/Recommendation";
 import Similar from "./carousels/Similar";
 import Cast from "./cast/Cast";
 import DetailBanner from "./detailBanner/DetailBanner";
-
+import "./style.scss";
 const Detail = () => {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}/videos`);
@@ -15,7 +15,7 @@ const Detail = () => {
   );
 
   return (
-    <div>
+    <div className="detail">
       <DetailBanner video={data?.results[0]} crew={credits?.crew} />
       <Cast data={credits?.cast} loading={creditsLoading} />
       <VideosSection data={data} loading={loading} />
