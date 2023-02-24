@@ -11,7 +11,7 @@ const HeroBanner = () => {
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
 
-  const { data, loading } = useFetch("/movie/upcoming ");
+  const { data, loading } = useFetch("/movie/upcoming");
   useEffect(() => {
     const bg =
       url.backdrop +
@@ -40,11 +40,11 @@ const HeroBanner = () => {
           </span>
           <div className="searchInput">
             <input
-              value={input}
+              // value={input}
               type="text"
               placeholder="Search for a movie or tv show... "
-              onKeyUp={searchQueryHandler}
-              onChange={(e) => setInput(e.target.value)}
+              // onKeyUp={searchQueryHandler}
+              // onChange={(e) => setInput(e.target.value)}
             />
             <button>Search</button>
           </div>
